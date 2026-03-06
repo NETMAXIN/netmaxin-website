@@ -45,8 +45,9 @@ export default function ActivityTracker() {
                 referrer: document.referrer || ''
             }
 
+            const AUTH_API_URL = process.env.NEXT_PUBLIC_PHP_BACKEND_URL ? `${process.env.NEXT_PUBLIC_PHP_BACKEND_URL.replace(/\/$/, '')}/auth.php` : 'https://api.netmaxin.com/auth.php';
             // Use fetch with catch - never crashes
-            fetch('/api/auth', {
+            fetch(AUTH_API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),

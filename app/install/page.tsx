@@ -18,8 +18,9 @@ export default function InstallPage() {
     })
 
     useEffect(() => {
+        const INSTALL_API_URL = process.env.NEXT_PUBLIC_PHP_BACKEND_URL ? `${process.env.NEXT_PUBLIC_PHP_BACKEND_URL.replace(/\/$/, '')}/install_api.php` : 'https://api.netmaxin.com/install_api.php';
         // Check if already installed
-        fetch('/api/install', {
+        fetch(INSTALL_API_URL, {
             method: 'POST',
             body: JSON.stringify({ action: 'check' }),
             headers: { 'Content-Type': 'application/json' }
@@ -46,7 +47,8 @@ export default function InstallPage() {
         setSuccess('')
 
         try {
-            const res = await fetch('/api/install', {
+            const INSTALL_API_URL = process.env.NEXT_PUBLIC_PHP_BACKEND_URL ? `${process.env.NEXT_PUBLIC_PHP_BACKEND_URL.replace(/\/$/, '')}/install_api.php` : 'https://api.netmaxin.com/install_api.php';
+            const res = await fetch(INSTALL_API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(form)

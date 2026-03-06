@@ -19,8 +19,10 @@ const PHP_URLS = [
 ]
 
 async function tryPhpUrls(body: string, headers: Record<string, string>): Promise<Response | null> {
+    let lastError: any = null;
     for (const url of PHP_URLS) {
         try {
+            console.log(`Trying PHP backend URL: ${url}`);
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -34,12 +36,20 @@ async function tryPhpUrls(body: string, headers: Record<string, string>): Promis
             })
             // If the server returns a 404, the PHP endpoint is not at this URL
             if (response.status === 404) {
+                console.log(`404 Not Found at: ${url}`);
                 continue
             }
+            console.log(`Success! Connected to: ${url} (Status: ${response.status})`);
             return response
-        } catch {
+        } catch (error: any) {
+            console.error(`Failed to connect to ${url}: ${error.message}`);
+            lastError = error;
             continue
         }
+    }
+    
+    if (lastError) {
+        console.error("All PHP backend URLs failed. Last error:", lastError.message);
     }
     return null
 }

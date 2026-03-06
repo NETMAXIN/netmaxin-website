@@ -37,6 +37,11 @@ if (!$db || !$user || !$pass) {
         die(json_encode(["status" => "install_required", "message" => "Database not configured. Please visit /install to set up the database."]));
     }
     require_once __DIR__ . '/config.php';
+    $host = defined('DB_HOST') ? DB_HOST : $host;
+    $db = defined('DB_NAME') ? DB_NAME : $db;
+    $user = defined('DB_USER') ? DB_USER : $user;
+    $pass = defined('DB_PASS') ? DB_PASS : $pass;
+    $charset = defined('DB_CHARSET') ? DB_CHARSET : $charset;
 }
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

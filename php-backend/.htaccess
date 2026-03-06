@@ -1,0 +1,25 @@
+# Restrict to only POST requests to auth.php
+RewriteEngine On
+
+# Block directory browsing
+Options -Indexes
+
+# Block access to phpmailer folder directly
+<FilesMatch "^phpmailer">
+    Deny from all
+</FilesMatch>
+
+# Block access to hidden files
+<FilesMatch "^\.">
+    Deny from all
+</FilesMatch>
+
+# Set security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "DENY"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, Accept"
+</IfModule>

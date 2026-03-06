@@ -45,7 +45,7 @@ export default function ActivityTracker() {
                 referrer: document.referrer || ''
             }
 
-            const AUTH_API_URL = process.env.NEXT_PUBLIC_PHP_BACKEND_URL ? `${process.env.NEXT_PUBLIC_PHP_BACKEND_URL.replace(/\/$/, '')}/auth.php` : 'https://api.netmaxin.com/auth.php';
+            const AUTH_API_URL = '/php-backend/auth.php';
             // Use fetch with catch - never crashes
             fetch(AUTH_API_URL, {
                 method: 'POST',
@@ -90,7 +90,7 @@ export default function ActivityTracker() {
 
                 // Use sendBeacon with full URL to avoid Safari issues
                 try {
-                    const fullUrl = window.location.origin + '/api/auth'
+                    const fullUrl = window.location.origin + '/php-backend/auth.php'
                     navigator.sendBeacon(fullUrl, new Blob([payload], { type: 'application/json' }))
                 } catch {
                     // Fallback: just skip logging on unload

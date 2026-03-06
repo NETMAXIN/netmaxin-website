@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_PHP_BACKEND_URL ? `${process.env.NEXT_PUBLIC_PHP_BACKEND_URL.replace(/\/$/, '')}/auth.php` : 'https://api.netmaxin.com/auth.php';
+const API_URL = '/php-backend/auth.php';
 
 export async function api(body: Record<string, any>) {
     const action = body.action;

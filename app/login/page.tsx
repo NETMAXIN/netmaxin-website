@@ -32,7 +32,7 @@ export default function LoginPage() {
         password: ''
     })
 
-    const AUTH_API_URL = process.env.NEXT_PUBLIC_PHP_BACKEND_URL ? `${process.env.NEXT_PUBLIC_PHP_BACKEND_URL.replace(/\/$/, '')}/auth.php` : 'https://api.netmaxin.com/auth.php';
+    const AUTH_API_URL = '/php-backend/auth.php';
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
